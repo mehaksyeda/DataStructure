@@ -7,7 +7,7 @@ class Node{
         
     }
 }
-class BST{
+class BST1{
         constructor(){
             this.root=null
         }
@@ -71,3 +71,76 @@ inorder(node){
 }
 preorder(node){
     if(node!=null){
+         this.preorder(node.left)
+        console.log(node.data)
+        this.preorder(node.right)
+}
+}
+postorder(node){
+    if(node!=null){
+         this.postorder(node.left)
+        console.log(node.data)
+        this.postorder(node.right)
+}
+}
+remove(data){
+    this.root =this.removeNode(this.root,data)
+
+}
+removeNode(node, data){
+     
+    if(node==null){
+        return null;
+        
+    }else if(data<node.data){
+        node.left =this.removeNode(node.left,data)
+        return node;
+    }else if(data>node.data){
+        node.right =this.removeNode(node.right,data)
+        return node
+    }else{
+        if(node.left==null && node.right==null){
+            node=null
+            return null
+        }else if(node.left =null){
+            node=node.right
+            return node
+        }else if(node.right =null){
+            node=node.left
+            return node
+        }
+         var aux = this.findMinNode(node.right);
+        node.data = aux.data;
+ 
+        node.right = this.removeNode(node.right, aux.data);
+        return node;
+    }
+}
+findMinNode(node){
+    if(node.left==null){
+        return node;
+    }else{
+        return this.findMinNode(node.left)
+    }
+    
+}
+}
+var BST = new BST1();
+ 
+// Inserting nodes to the BinarySearchTree
+
+BST.insert(5);
+BST.insert(10);
+BST.insert(7);
+BST.insert(22);
+BST.insert(17);
+BST.insert(13);
+BST.insert(9);
+BST.insert(27);
+                         
+
+ 
+var root = BST.getRootNode();
+            
+BST.inorder(root);
+             
